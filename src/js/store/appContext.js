@@ -32,8 +32,9 @@ const injectContext = PassedComponent => {
 			 *
 			 **/
 			state.actions.loadContacts();
-			//state.actions.updateContact();
-			window.context = state;
+			state.actions.addContact();
+			state.actions.updateContact();
+			//window.context = state;
 		}, []);
 
 		// the initial value for the context its not null anymore, but the current state of this component,

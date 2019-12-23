@@ -14,6 +14,7 @@ export const ContactCard = props => {
 
 	// allows you to access store and action from flux.js
 	const { store, actions } = useContext(Context);
+	console.log("Store from ContactCard.js", store.output);
 
 	/* testing that the store displays the contacts
 	if (store.output == undefined || store.output == null) {

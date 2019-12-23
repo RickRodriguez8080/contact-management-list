@@ -13,7 +13,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					.then(response => response.json())
 					.then(results => {
 						// test to see that the contacts were fetched successfully
-						console.log("**Contacts**", results);
+						console.log("**loadContacts**", results);
 						setStore({
 							output: results
 						});
@@ -36,7 +36,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(response => console.log("Success:", JSON.stringify(response)))
+					.then(response => console.log("addContact Success:", JSON.stringify(response)))
 					.catch(error => console.error("Error:", error))
 
 					.then(() => {
@@ -45,7 +45,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 			},
 
 			updateContact(id, name, email, address, phone) {
-				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "PUT", // or 'POST'
 					body: JSON.stringify({
 						full_name: name,
@@ -59,7 +59,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(response => console.log("Success:", JSON.stringify(response)))
+					.then(response => console.log("updateContact Success:", JSON.stringify(response)))
 					.catch(error => console.error("Error:", error))
 
 					.then(() => {

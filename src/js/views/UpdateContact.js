@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import getState from "../store/flux";
 
 export const UpdateContact = props => {
-	const [name, setName] = useState({});
+	const [name, setName] = useState();
 	const [email, setEmail] = useState();
 	const [phone, setPhone] = useState();
 	const [address, setAddress] = useState();
@@ -57,7 +57,7 @@ export const UpdateContact = props => {
 						/>
 					</div>
 					<button
-						onClick={() => actions.updateContact(name, email, address, phone)}
+						onClick={() => actions.updateContact(props.match.params.theid, name, email, address, phone)}
 						type="button"
 						className="btn btn-primary form-control">
 						save
