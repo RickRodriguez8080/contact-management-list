@@ -2,17 +2,19 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import getState from "../store/flux";
+//import getState from "../store/flux";
 
 export const UpdateContact = props => {
-	const [name, setName] = useState();
-	const [email, setEmail] = useState();
-	const [phone, setPhone] = useState();
-	const [address, setAddress] = useState();
-
 	// allows you to access store and action from flux.js
 	const { store, actions } = useContext(Context);
+
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
+
 	console.log("id", props.match.params.theid);
+	console.log("UpdateContact: ", store.output);
 
 	return (
 		<div className="container">
@@ -22,7 +24,7 @@ export const UpdateContact = props => {
 					<div className="form-group">
 						<label>Full Name</label>
 						<input
-							defaultValue={name}
+							defaultValue={store.output[props.match.params.index].full_name}
 							onChange={e => setName(e.target.value)}
 							type="text"
 							className="form-control"
@@ -32,6 +34,7 @@ export const UpdateContact = props => {
 					<div className="form-group">
 						<label>Email</label>
 						<input
+							defaultValue={store.output[props.match.params.index].email}
 							onChange={e => setEmail(e.target.value)}
 							type="email"
 							className="form-control"
@@ -41,6 +44,7 @@ export const UpdateContact = props => {
 					<div className="form-group">
 						<label>Phone</label>
 						<input
+							defaultValue={store.output[props.match.params.index].phone}
 							onChange={e => setPhone(e.target.value)}
 							type="phone"
 							className="form-control"
@@ -50,6 +54,7 @@ export const UpdateContact = props => {
 					<div className="form-group">
 						<label>Address</label>
 						<input
+							defaultValue={store.output[props.match.params.index].address}
 							onChange={e => setAddress(e.target.value)}
 							type="text"
 							className="form-control"

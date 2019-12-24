@@ -13,7 +13,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					.then(response => response.json())
 					.then(results => {
 						// test to see that the contacts were fetched successfully
-						console.log("**loadContacts**", results);
+						//console.log("**loadContacts**", results);
 						setStore({
 							output: results
 						});
@@ -36,7 +36,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(response => console.log("addContact Success:", JSON.stringify(response)))
+					//.then(response => console.log("addContact Success:", JSON.stringify(response)))
 					.catch(error => console.error("Error:", error))
 
 					.then(() => {
@@ -45,26 +45,27 @@ const getState = ({ getStore, setStore, getActions }) => {
 			},
 
 			updateContact(id, name, email, address, phone) {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+				let url = "https://assets.breatheco.de/apis/fake/contact/";
+				fetch(url + id, {
 					method: "PUT", // or 'POST'
+					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
 						full_name: name,
 						email: email,
 						address: address,
 						phone: phone,
 						agenda_slug: "downtown_xii"
-					}), // data can be `string` or {object}!
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-					.then(res => res.json())
-					.then(response => console.log("updateContact Success:", JSON.stringify(response)))
-					.catch(error => console.error("Error:", error))
-
-					.then(() => {
-						getActions().loadContacts();
-					});
+					}) // data can be `string` or {object}!
+				}).then(() => {
+					fetch(url + "agenda/downtown_xii")
+						.then(response => response.json())
+						.then(result => {
+							console.log("UC results: ", result),
+								setStore({
+									output: result
+								});
+						});
+				});
 			}
 		}
 	};
